@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <title>AngularFire讀寫資料測試</title>
+  <!-- metas -->
+  <meta charset="utf-8">
+  <!-- <link rel="stylesheet" href="css/mystyle.css"> -->
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+  <!-- MyJavaScript -->
+  <script src="js/myapp.js"></script>
+
+</head>
+<body ng-app="WishListApp">
+
+  <div class="container" ng-controller="WishDisplayCtrl">
+  <ul>
+    <li ng-repeat="wish in wishlist">{{wish.name}} : {{wish.email}} : {{wish.wish}}</li>
+  </ul>
+
+  <div>
+    <!-- push a new message into the array -->
+    <form ng-submit="addMessage(name, email, location, wish)">
+      <input type="text" placeholder="name" ng-model="name" />
+      <input type="mail" placeholder="email" ng-model="email" />
+      <input type="text" placeholder="location" ng-model="location" />
+      <input type="text" placeholder="wish" ng-model="wish" />
+      <button type="submit">add wish</button>
+    </form>
+
+  </div>
+
+
+</body>
+</html>
