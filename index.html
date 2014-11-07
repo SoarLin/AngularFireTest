@@ -4,34 +4,70 @@
   <title>AngularFire讀寫資料測試</title>
   <!-- metas -->
   <meta charset="utf-8">
-  <!-- <link rel="stylesheet" href="css/mystyle.css"> -->
+  <meta property="og:title" content="AngularFire讀寫資料測試"/> <!-- 分享的TITLE  -->
+  <meta property="og:description" content="AngularJS, Firebase"/> <!-- 分享的內容描述 -->
+  <meta property="og:url" content="http://soarlin.pixnet.net/blog"/> <!-- 分享網頁的連結 -->
+  <meta property="og:image" content="http://pic.pimg.tw/soarlin/1414249945-3045312650_n.jpg"/>
 
+  <!-- <link rel="stylesheet" href="css/mystyle.css"> -->
+  <!-- Semantic UI -->
+  <link rel="stylesheet" href="component/semantic/build/packaged/css/semantic.min.css">
+
+  <!-- jQuery -->
+  <script src="component/jquery/dist/jquery.min.js"></script>
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.19/angular.min.js"></script>
   <!-- Firebase -->
   <script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script>
+  <!-- Semantic UI -->
+  <script src="component/semantic/build/packaged/javascript/semantic.min.js"></script>
+  <!-- Isotope -->
+  <script src="component/isotope/dist/isotope.pkgd.js"></script>
+  <!-- jQuery Sharrre -->
+  <script src="component/sharrre/jquery.sharrre.min.js"></script>
   <!-- MyJavaScript -->
   <script src="js/myapp.js"></script>
+
+<style type="text/css">
+
+</style>
 
 </head>
 <body ng-app="WishListApp">
 
-  <div class="container" ng-controller="WishDisplayCtrl">
-  <ul>
-    <li ng-repeat="wish in wishlist">{{wish.name}} : {{wish.email}} : {{wish.wish}}</li>
-  </ul>
+  <div class="container">
 
-  <div>
+    <div class="locationFilter">
+      <a href="#" data-filter="*" class="current">全台</a>
+      <a href="#" data-filter=".North">北區</a>
+      <a href="#" data-filter=".Center">中區</a>
+      <a href="#" data-filter=".South">南區</a>
+      <a href="#" data-filter=".East">東區</a>
+    </div>
+    <div class="four column stackable ui grid wishContiner" ng-controller="WishDisplayCtrl">
+        <div class="column {{wish.group}}" ng-repeat="wish in wishlist">
+          <div class="ui segment">
+            <p>{{wish.name}} : {{wish.wish}}</p>
+          </div>
+        </div>
+    </div>
+
     <!-- push a new message into the array -->
-    <form ng-submit="addMessage(name, email, location, wish)">
-      <input type="text" placeholder="name" ng-model="name" />
-      <input type="mail" placeholder="email" ng-model="email" />
-      <input type="text" placeholder="location" ng-model="location" />
-      <input type="text" placeholder="wish" ng-model="wish" />
-      <button type="submit">add wish</button>
-    </form>
+    <div ng-controller="WishAddCtrl">
+      <form ng-submit="addMessage(name, email, location, wish)">
+        <input type="text" placeholder="name" ng-model="name" />
+        <input type="mail" placeholder="email" ng-model="email" />
+        <!-- <input type="text" placeholder="location" ng-model="location" /> -->
+        <select ng-model="location" ng-options="county.CountyName for county in counties">
+          <option value="">-- 請選擇 --</option>
+        </select>
+        <input type="text" id="wish_text" placeholder="wish" ng-model="wish" />
+        <button type="submit">add wish</button>
+        <div id="demo" data-title="食我許願池" data-url="http://eatme.tw" style="display:none;"></div>
+      </form>
+    </div>
 
   </div>
 
